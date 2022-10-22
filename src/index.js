@@ -1,18 +1,30 @@
 //testing if this pushes
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom/client';
+import { Route, BrowserRouter, Routes, useNavigate } from 'react-router-dom';
 
 import {
     Activities,
     Login,
     Register,
     Routines,
-    Users
+    Users,
+    Home
 } from './components'; 
+
 
 const App = () => {
 
     return (
         <div>
+            hello
             <Routes>
+
+
+            <Route 
+          path='/' 
+          element={<Home />} 
+             />
 
             <Route 
             path='/Activities' 
@@ -59,3 +71,12 @@ const App = () => {
         </div>
     )
 }
+
+
+const container = document.querySelector('#container');
+const root = ReactDOM.createRoot(container);
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
