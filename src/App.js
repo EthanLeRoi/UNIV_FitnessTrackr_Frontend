@@ -26,7 +26,7 @@ function App() {
       <Route 
         path='/Activities' 
         element={<Activities 
-        activities={activities} 
+        //activities={activities} 
     />} 
     />
 
@@ -34,14 +34,14 @@ function App() {
     <Route 
       path='/Routines'
       element={<Routines
-      routines={routines}
+      //routines={routines}
     />}
     />
 
-    <Users
+    <Route
       path='/Users'
       element={<Users
-      users={users}
+      //users={users}
     />}
     />
 
@@ -49,16 +49,16 @@ function App() {
  <Route 
     path='/register' 
     element={<Register 
-    setToken={ setToken } 
-    token={token} 
-    navigate={navigate} 
+    //setToken={ setToken } 
+    //token={token} 
+    //navigate={navigate} 
   />} 
 />
 <Route
     path='/login'
     element={ <Login 
-    setToken={ setToken }
-    navigate={ navigate }
+    //setToken={ setToken }
+    //navigate={ navigate }
   />}
 />
       </Routes>
