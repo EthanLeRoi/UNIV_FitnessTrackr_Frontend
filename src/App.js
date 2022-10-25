@@ -8,8 +8,8 @@ import {
   Login,
   Register,
   Routines,
-  Users,
-  Home
+  Home,
+  Navbar
 } from './components'; 
 
 function App() {
@@ -38,12 +38,14 @@ function App() {
     />}
     />
 
-    <Route
-      path='/Users'
-      element={<Users
-      //users={users}
+
+<Route 
+      path='/Navbar'
+      element={<Navbar
+      //routines={routines}
     />}
     />
+   
 
 
  <Route 
