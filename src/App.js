@@ -4,18 +4,21 @@ import React, { useState, useEffect } from 'react';
 import { Route, BrowserRouter, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 
+
 import {
   Activities,
   Login,
   Register,
   Routines,
   Home,
-  Navbar
+  Navbar,
+  CreateRoutine,
+  EditRoutine
 } from './components'; 
 
 import {
   getRoutines,
-  getUserDetails
+  // getUserDetails
 } from './api';
 
 
@@ -23,14 +26,15 @@ const App = () => {
   
  const [routines, setRoutines] = useState([]);
   const [token, setToken] = useState('');
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
   
   const navigate = useNavigate();
+
   
   function logout() {
     window.localStorage.removeItem('token');
     setToken('');
-    setUser({});
+    // setUser({});
   }
   
   async function fetchRoutines() {
@@ -48,12 +52,12 @@ const App = () => {
       return;
     }
     
-    const results = await getUserDetails(token)
-    if (results.success) {
-      setUser(results.data);
-    } else {
-      console.log(results.error.message);
-    }
+    // const results = await getUserDetails(token)
+    // if (results.success) {
+    //   setUser(results.data);
+    // } else {
+    //   console.log(results.error.message);
+    // }
   }
   
   useEffect(() => {
@@ -84,32 +88,48 @@ const App = () => {
     />
 
 
-<Route 
+{/* <Route 
         path='/myRoutines' 
         element={<myRoutines
         //activities={activities} 
     />} 
-    />
+    /> */}
 
-
-    
-
-    <Route 
-      path='/Routines'
+<Route 
+      path='/routines'
       element={<Routines
       //routines={routines}
     />}
     />
+<Route
+          exact path='/routines/create-routine'
+          element={<CreateRoutine 
+            token={ token } 
+            fetchRoutines={ fetchRoutines } 
+            navigate={ navigate }
+          /> }
+        />
+
+<Route
+          exact path='/routines/edit-routine/:routineID'
+          element={<EditRoutine
+            routines={ routines }
+            token={ token }
+            fetchRoutines={ fetchRoutines } 
+            navigate={ navigate }
+          />}
+        />
 
 
-{/* <Route 
-      path='/Navbar'
-      element={<Navbar
-      //routines={routines}
-    />}
-    /> */}
-   
-
+{/*
+may or may not need single post view come back to it
+<Route
+          path='/posts/:postID'
+          element={<SinglePostView 
+            posts={ posts }
+            token={ token }
+          />}
+        /> */}
 
  <Route 
     path='/register' 

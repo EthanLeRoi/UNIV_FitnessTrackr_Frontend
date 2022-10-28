@@ -63,7 +63,7 @@ export const getUserDetails = async (token) => {
     }
 }
 
-
+//line 69 /:username do we ${username instead of /:username}
 export const getPublicRoutines = async () => {
     try {
         const response = await fetch(`${baseURL}/users/:username/routines`, {
@@ -185,15 +185,17 @@ export const createRoutines = async (name, goal, isPublic) => {
 }
 }
 
-
-export const updateRoutines = async (name, description, isPublic) => {
+//make sure no [ ] needed for _id on line 191
+export const updateRoutines = async ({name, description, isPublic, _id}) => {
     try {
-        const response = await fetch(`${baseURL}/routines/:routineId`, {
+        const response = await fetch(`${baseURL}/routines/${_id}`, {
             method: "PATCH",
             body: JSON.stringify({
-                name: name,
-                description: description,
-                isPublic: isPublic
+                routine: {
+                name,
+                description,
+                isPublic
+                }
             })
 
         })
@@ -205,9 +207,9 @@ export const updateRoutines = async (name, description, isPublic) => {
     }
 }
 
-export const deleteRoutine = async (token) => {
+export const deleteRoutine = async (token, _id) => {
     try {
-        const response = await fetch(`${baseURL}/routines/:routineId`, {
+        const response = await fetch(`${baseURL}/routines/${_id}`, {
   method: "DELETE",
   headers: {
     'Content-Type': 'application/json',
