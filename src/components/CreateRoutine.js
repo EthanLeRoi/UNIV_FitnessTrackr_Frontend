@@ -18,6 +18,7 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
    goal,
    isPublic,
   };
+
   async function addRoutine() {
     const results = await createRoutines(token, newRoutine);
     fetchRoutines();
@@ -53,16 +54,16 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
             onChange={(event) => setName(event.target.value)}
           />
          
-
-         <button variant="contained" type="submit">Create Routine</button>
-
-        </div>
-
         <FormControlLabel control={<Checkbox type='checkbox'
             color='success'
             checked={isPublic}
             onChange={(event)=> setIsPublic(event.target.checked)}
         />}  label="isPublic?"/>
+
+         <button variant="contained" type="submit">Create Routine</button>
+
+        </div>
+
       </form>
     
   );

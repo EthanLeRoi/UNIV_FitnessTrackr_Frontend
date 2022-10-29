@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
+// import ReactDOM from 'react-dom/client';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 // import './App.css';
 import './App.css';
@@ -78,7 +78,7 @@ const App = () => {
 
 
       <Route
-        path=''
+        path='/'
         element={<Home />}
       />
 
@@ -92,7 +92,7 @@ const App = () => {
 <Route 
       path='/routines'
       element={<Routines
-      //routines={routines}
+      routines={routines}
     />}
     />
 <Route

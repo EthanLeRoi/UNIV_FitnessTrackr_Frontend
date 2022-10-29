@@ -1,10 +1,12 @@
 
-import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { deleteRoutine } from '../api';
+import { Button, TextField, Typography } from '@mui/material';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 
-const Routines = ({ routines }) => {
+const Routines = ({ routines, token }) => {
   const [searchTerm, setSearchTerm] = useState('');
  
   function routineMatches(routine, string) {
@@ -45,19 +47,19 @@ const Routines = ({ routines }) => {
             <p className='postGoal'>Goal: {goal}</p>
             {
               isAuthor ? (
-            
-                <button>
-                  <p className='isAuthor'>Is Author </p>
-
-                  <Link to={`/routines/edit-routine/${_id}`}>Edit</Link>
-                  
-                </button>
+                <>
+                <Typography align = 'left'>
+                    <ButtonGroup variant="contained">
+                        <Button className="post-buttons"><Link to={`/posts/edit-post/${_id}`}>Edit</Link></Button>
+                        <Button className="post-buttons" onClick={()=> deleteRoutine(token, _id)}>Delete</Button>
+                    </ButtonGroup>
+                </Typography>    
+                </>
               ) : (
                 
-                <button>
-                  <Link class="ViewButton" to={`/routines/${_id}` }>View</Link>
-                
-                </button>
+                <Typography align= 'left'>    
+                                    <Button className="post-buttons" variant="contained"><Link to={`/posts/${_id}`}>View</Link></Button>
+                </Typography>
               
               )
               
