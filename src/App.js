@@ -21,8 +21,12 @@ import {
 
 import {
   getRoutines,
+<<<<<<< HEAD
   getUserDetails,
   getActivities
+=======
+  getUserDetails
+>>>>>>> 0335b901162dbbf4b02b67cf62d99e7ae4a569cb
 } from './api';
 
 
@@ -44,11 +48,15 @@ const App = () => {
   
   async function fetchRoutines() {
     const results = await getRoutines(token)
+<<<<<<< HEAD
     setRoutines(results);
   }
   async function fetchActivities() {
     const results = await getActivities(token)
     setActivities(results);
+=======
+    setRoutines(results.routines);
+>>>>>>> 0335b901162dbbf4b02b67cf62d99e7ae4a569cb
   }
   
   async function getMe() {

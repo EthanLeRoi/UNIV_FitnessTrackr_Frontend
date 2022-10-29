@@ -24,9 +24,12 @@ return (
      <div className='searchedActivity'>
         <form onSubmit={(event) => {
             event.preventDefault();
+<<<<<<< HEAD
             <button>
             <Link to='activities/attach-activities-to-routines'>Add a Routine Activity</Link>
            </button>
+=======
+>>>>>>> 0335b901162dbbf4b02b67cf62d99e7ae4a569cb
         }}> 
           <TextField
            type = 'text'

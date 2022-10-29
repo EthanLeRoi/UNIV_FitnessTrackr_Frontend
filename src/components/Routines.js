@@ -45,13 +45,22 @@ const Routines = ({ routines, token }) => {
           </div>
     {
       routinesToDisplay.map((routine) => {
+<<<<<<< HEAD
         const {title, name, goal, _id, isAuthor } = routine;
+=======
+        const {name, goal, description, duration, title, _id, isAuthor } = routine;
+>>>>>>> 0335b901162dbbf4b02b67cf62d99e7ae4a569cb
         return (
           <div className='postHolder' key={_id}>
             <h3 className='postTitle'>{title}</h3>
             <p className='postName'>Name: {name}</p>
             <p className='postGoal'>Goal: {goal}</p>
+<<<<<<< HEAD
  
+=======
+            <p className='postDescription'>Description: {description}</p>
+            <p className='postDuration'>Duration: {duration}</p>
+>>>>>>> 0335b901162dbbf4b02b67cf62d99e7ae4a569cb
             {
               isAuthor ? (
                 <>
