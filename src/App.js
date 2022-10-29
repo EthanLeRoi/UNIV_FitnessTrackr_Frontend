@@ -40,7 +40,7 @@ const App = () => {
   
   async function fetchRoutines() {
     const results = await getRoutines(token)
-    setRoutines(results.data.routines);
+    setRoutines(results.routines);
   }
   
   async function getMe() {
@@ -55,19 +55,20 @@ const App = () => {
     
     const results = await getUserDetails(token)
     if (results.success) {
-      setUser(results.data);
+      setUser(results);
     } else {
-      console.log(results.error.message);
+      console.log(results.message);
     }
   }
   
   useEffect(() => {
     fetchRoutines();
-  }, [token])
-  
-  useEffect(() => {
     getMe();
   }, [token])
+  
+  // useEffect(() => {
+  //   getMe();
+  // }, [token])
   
   return (
     <div>
