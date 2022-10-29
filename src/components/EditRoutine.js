@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { updateRoutine} from '../api';
+import { updateRoutines} from '../api';
 
 
 const EditRoutine = ({ routines, token }) => {
@@ -17,7 +17,7 @@ const EditRoutine = ({ routines, token }) => {
   const [newIsPublic, setNewIsPublic] = useState(isPublic);
   
   async function editRoutine() {
-    const updatedRoutine = {
+    const updatedRoutines = {
       token: token,
       title: newTitle,
       name: newName,
@@ -25,7 +25,7 @@ const EditRoutine = ({ routines, token }) => {
     isPublic: newIsPublic,
     _id: routineID
     }
-    await updateRoutine(updatedRoutine)
+    await updateRoutines(updatedRoutines)
   }
   
 //   async function handleDelete() {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createRoutine} from "../api";
+import { createRoutines } from "../api";
 
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -19,7 +19,7 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
    isPublic
   };
   async function addRoutine() {
-    const results = await createRoutine(token, newRoutine);
+    const results = await createRoutines(token, newRoutine);
     fetchRoutines();
     navigate(`/posts`);
   }

@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-// import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 import { Route, BrowserRouter, Routes, useNavigate } from 'react-router-dom';
+// import './App.css';
 import './App.css';
 
 
@@ -11,7 +12,7 @@ import {
   Register,
   Routines,
   Home,
-  Navbar,
+  Navar,
   CreateRoutine,
   EditRoutine
 } from './components'; 
@@ -70,13 +71,14 @@ const App = () => {
   
   return (
     <div>
+    
       <Navbar logout={ logout } token={ token }/>
-    <BrowserRouter >
+
     <Routes>
 
 
       <Route
-        path='/'
+        path=''
         element={<Home />}
       />
 
@@ -86,14 +88,6 @@ const App = () => {
         //activities={activities} 
     />} 
     />
-
-
-{/* <Route 
-        path='/myRoutines' 
-        element={<myRoutines
-        //activities={activities} 
-    />} 
-    /> */}
 
 <Route 
       path='/routines'
@@ -121,16 +115,6 @@ const App = () => {
         />
 
 
-{/*
-may or may not need single post view come back to it
-<Route
-          path='/posts/:postID'
-          element={<SinglePostView 
-            posts={ posts }
-            token={ token }
-          />}
-        /> */}
-
  <Route 
     path='/register' 
     element={<Register 
@@ -146,10 +130,21 @@ may or may not need single post view come back to it
     navigate={ navigate }
   />}
 />
-      </Routes>
-    </BrowserRouter>
+</Routes>
+  
     </div>
   );
-}
+} 
+
+
+const container = document.querySelector('#container');
+const root = ReactDOM.createRoot(container);
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
+
 
 export default App;

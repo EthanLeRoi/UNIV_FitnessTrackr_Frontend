@@ -1,14 +1,17 @@
 * {
     background:greenyellow;
-    
+    color: black;
 }
+
+
+
 
 *button {
     background-color:darkslateblue;
     color: white;
   }
   
-  .button {
+.button {
     background-color:darkslateblue;
     color: white;
   }
