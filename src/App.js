@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
-import { Route, BrowserRouter, Routes, useNavigate } from 'react-router-dom';
+// import ReactDOM from 'react-dom/client';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 // import './App.css';
 import './App.css';
 
@@ -12,22 +11,27 @@ import {
   Register,
   Routines,
   Home,
-  Navar,
+ MyRoutines,
+  Navbar,
   CreateRoutine,
-  EditRoutine
+  EditRoutine,
+  CreateActivity,
+  AttachActivitiesToRoutines
 } from './components'; 
 
 import {
   getRoutines,
-  // getUserDetails
+  getUserDetails,
+  getActivities
 } from './api';
 
 
 const App = () => {
   
  const [routines, setRoutines] = useState([]);
+ const [activities, setActivities] = useState([]);
   const [token, setToken] = useState('');
-  // const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
   
   const navigate = useNavigate();
 
@@ -35,12 +39,16 @@ const App = () => {
   function logout() {
     window.localStorage.removeItem('token');
     setToken('');
-    // setUser({});
+    setUser({});
   }
   
   async function fetchRoutines() {
     const results = await getRoutines(token)
-    setRoutines(results.data.routines);
+    setRoutines(results);
+  }
+  async function fetchActivities() {
+    const results = await getActivities(token)
+    setActivities(results);
   }
   
   async function getMe() {
@@ -53,21 +61,23 @@ const App = () => {
       return;
     }
     
-    // const results = await getUserDetails(token)
-    // if (results.success) {
-    //   setUser(results.data);
-    // } else {
-    //   console.log(results.error.message);
-    // }
+    const results = await getUserDetails(token)
+    if (results.success) {
+      setUser(results);
+    } else {
+      console.log(results.message);
+    }
   }
   
   useEffect(() => {
     fetchRoutines();
+    getMe();
+    fetchActivities();
   }, [token])
   
-  useEffect(() => {
-    getMe();
-  }, [token])
+  // useEffect(() => {
+  //   getMe();
+  // }, [token])
   
   return (
     <div>
@@ -78,21 +88,42 @@ const App = () => {
 
 
       <Route
-        path=''
+        path='/'
         element={<Home />}
       />
 
       <Route 
         path='/Activities' 
         element={<Activities 
-        //activities={activities} 
+        activities={activities} 
     />} 
     />
+
+<Route
+          exact path='/activities/create-activity'
+          element={<CreateActivity 
+            token={ token } 
+            fetchActivities={ fetchActivities } 
+            navigate={ navigate }
+          /> }
+        />
+
+
+<Route 
+      exact path='/activities/attach-activities-to-routines'
+      element={<AttachActivitiesToRoutines
+        token={ token } 
+        fetchActivities={ fetchActivities } 
+        navigate={ navigate }
+      // attachactivitiestoroutines={AttachActivitiesToRoutines}
+    />}
+    />
+
 
 <Route 
       path='/routines'
       element={<Routines
-      //routines={routines}
+      routines={routines}
     />}
     />
 <Route
@@ -115,6 +146,13 @@ const App = () => {
         />
 
 
+<Route 
+          path='/my-routines' 
+          element={<MyRoutines
+          user={ user }
+          />} 
+   />
+
  <Route 
     path='/register' 
     element={<Register 
@@ -135,15 +173,6 @@ const App = () => {
     </div>
   );
 } 
-
-
-const container = document.querySelector('#container');
-const root = ReactDOM.createRoot(container);
-root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
 
 
 
