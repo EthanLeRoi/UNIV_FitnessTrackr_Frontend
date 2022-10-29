@@ -21,7 +21,7 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
   async function addRoutine() {
     const results = await createRoutines(token, newRoutine);
     fetchRoutines();
-    navigate(`/posts`);
+    navigate(`/routines`);
   }
   return (
     
@@ -33,7 +33,7 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
       >
         <div>
           
-          <h1>Create A New Post</h1>
+          <h1>Create A New Routine</h1>
           <input
             type="text"
             placeholder="Title*"
@@ -54,7 +54,7 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
           />
          
 
-         <button variant="contained" type="submit">Create Post</button>
+         <button variant="contained" type="submit">Create Routine</button>
 
         </div>
 
@@ -62,7 +62,7 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
             color='success'
             checked={isPublic}
             onChange={(event)=> setIsPublic(event.target.checked)}
-        />}  label="Self Deliver?"/>
+        />}  label="isPublic?"/>
       </form>
     
   );

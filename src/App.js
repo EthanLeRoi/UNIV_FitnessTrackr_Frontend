@@ -1,7 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
-import { Route, BrowserRouter, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 // import './App.css';
 import './App.css';
 
@@ -12,7 +10,7 @@ import {
   Register,
   Routines,
   Home,
-  Navar,
+  Navbar,
   CreateRoutine,
   EditRoutine
 } from './components'; 
@@ -135,15 +133,6 @@ const App = () => {
     </div>
   );
 } 
-
-
-const container = document.querySelector('#container');
-const root = ReactDOM.createRoot(container);
-root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
 
 
 
