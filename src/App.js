@@ -10,6 +10,7 @@ import {
   Register,
   Routines,
   Home,
+  Profile,
   Navbar,
   CreateRoutine,
   EditRoutine
@@ -17,7 +18,7 @@ import {
 
 import {
   getRoutines,
-  // getUserDetails
+  getUserDetails
 } from './api';
 
 
@@ -25,7 +26,7 @@ const App = () => {
   
  const [routines, setRoutines] = useState([]);
   const [token, setToken] = useState('');
-  // const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
   
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ const App = () => {
   function logout() {
     window.localStorage.removeItem('token');
     setToken('');
-    // setUser({});
+    setUser({});
   }
   
   async function fetchRoutines() {
@@ -51,12 +52,12 @@ const App = () => {
       return;
     }
     
-    // const results = await getUserDetails(token)
-    // if (results.success) {
-    //   setUser(results.data);
-    // } else {
-    //   console.log(results.error.message);
-    // }
+    const results = await getUserDetails(token)
+    if (results.success) {
+      setUser(results.data);
+    } else {
+      console.log(results.error.message);
+    }
   }
   
   useEffect(() => {
@@ -112,6 +113,13 @@ const App = () => {
           />}
         />
 
+
+<Route 
+          path='/profile' 
+          element={<Profile 
+          user={ user }
+          />} 
+   />
 
  <Route 
     path='/register' 

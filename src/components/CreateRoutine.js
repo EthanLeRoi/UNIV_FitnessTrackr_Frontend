@@ -16,7 +16,7 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
    title,
    name, 
    goal,
-   isPublic
+   isPublic,
   };
   async function addRoutine() {
     const results = await createRoutines(token, newRoutine);
