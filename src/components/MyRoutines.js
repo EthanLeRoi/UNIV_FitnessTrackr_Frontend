@@ -2,7 +2,7 @@
 import React from 'react';
 // import {Link} from 'react-router-dom';
 
-const Profile = ({ user }) => {
+const MyRoutines = ({ user }) => {
   const messages = user.messages;
   const userID = user._id;
   
@@ -48,4 +48,4 @@ const Profile = ({ user }) => {
   )
 }
 
-export default Profile;
+export default MyRoutines;

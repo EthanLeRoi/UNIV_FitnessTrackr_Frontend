@@ -11,7 +11,7 @@ import {
   Register,
   Routines,
   Home,
-  Profile,
+ MyRoutines,
   Navbar,
   CreateRoutine,
   EditRoutine
@@ -117,8 +117,8 @@ const App = () => {
 
 
 <Route 
-          path='/profile' 
-          element={<Profile 
+          path='/my-routines' 
+          element={<MyRoutines
           user={ user }
           />} 
    />

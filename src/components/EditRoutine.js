@@ -10,8 +10,9 @@ const EditRoutine = ({ routines, token, fetchRoutine, navigate }) => {
   const {title, name, goal, isPublic} = currentRoutine;
   
   const [newTitle, setNewTitle] = useState(title);
-  const [newGoal, setNewGoal] = useState(goal);
   const [newName, setNewName] = useState(name);
+
+  const [newGoal, setNewGoal] = useState(goal);
   const [newIsPublic, setNewIsPublic] = useState(isPublic);
   
   async function editRoutine() {
@@ -19,6 +20,7 @@ const EditRoutine = ({ routines, token, fetchRoutine, navigate }) => {
       token: token,
       title: newTitle,
       name: newName,
+  
     goal: newGoal,
     isPublic: newIsPublic,
     _id: routineID
@@ -40,13 +42,13 @@ const EditRoutine = ({ routines, token, fetchRoutine, navigate }) => {
       editRoutine();
       navigate('/routines')
     }}>
+
       <input className='editTitle'
         type='text'
         placeholder={title}
         onChange={(ev) => setNewTitle(ev.target.value)}
       />
     
-     
 
       <input className='editName'
         type='text'
@@ -54,13 +56,12 @@ const EditRoutine = ({ routines, token, fetchRoutine, navigate }) => {
         onChange={(ev) => setNewName(ev.target.value)}
       />
 
-  
-
-      <input className='editGoal'
+<input className='editGoal'
         type='text'
         placeholder={goal}
         onChange={(ev) => setNewGoal(ev.target.value)}
       />
+
 
       <input className='newisPublic'
         type='text'

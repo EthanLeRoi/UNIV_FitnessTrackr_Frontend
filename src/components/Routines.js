@@ -5,6 +5,9 @@ import { deleteRoutine } from '../api';
 import { Button, TextField, Typography } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
+//most likely need attachActivityToRoutine here
+//update routine activity
+
 
 const Routines = ({ routines, token }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,6 +30,9 @@ const Routines = ({ routines, token }) => {
        <div className='searchedRoutine'>
           <form onSubmit={(event) => {
               event.preventDefault();
+              <button>
+              <Link to='/routines/create-routine'>Add a Routine</Link>
+             </button>
           }}> 
             <TextField
              type = 'text'
@@ -39,12 +45,14 @@ const Routines = ({ routines, token }) => {
           </div>
     {
       routinesToDisplay.map((routine) => {
-        const {name, goal, title, _id, isAuthor } = routine;
+        const {name, goal, description, duration, title, _id, isAuthor } = routine;
         return (
           <div className='postHolder' key={_id}>
             <h3 className='postTitle'>{title}</h3>
             <p className='postName'>Name: {name}</p>
             <p className='postGoal'>Goal: {goal}</p>
+            <p className='postDescription'>Description: {description}</p>
+            <p className='postDuration'>Duration: {duration}</p>
             {
               isAuthor ? (
                 <>

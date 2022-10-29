@@ -7,8 +7,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
   const [title, setTitle] = useState("");
-  const [goal, setGoal] = useState("");
   const [name, setName] = useState("");
+
+  const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
 
 
@@ -41,12 +42,7 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
             value={title}
             onChange={(event) => setTitle(event.target.value)}
           />
-          <input
-            type="text"
-            placeholder="Goal*"
-            value={goal}
-            onChange={(event) => setGoal(event.target.value)}
-          />
+        
           <input
             type="text"
             placeholder="Name*"
@@ -54,6 +50,17 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
             onChange={(event) => setName(event.target.value)}
           />
          
+
+    
+
+
+         <input
+            type="text"
+            placeholder="Goal*"
+            value={goal}
+            onChange={(event) => setGoal(event.target.value)}
+          />
+
         <FormControlLabel control={<Checkbox type='checkbox'
             color='success'
             checked={isPublic}
