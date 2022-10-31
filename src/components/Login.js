@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import {loginUser} from '../api'
+
 const Login = ({ setToken, navigate }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     
     const handleSubmit = async () => {
       const results = await loginUser(username, password);
-      if (results.success) {
-        setToken(results.data.token);
-        window.localStorage.setItem('token', results.data.token);
+      if (results.token) {
+        setToken(results.token);
+        window.localStorage.setItem('token', results.token);
         navigate('/profile');
       } else {
-        console.log(results.error.message)
+        // console.log(results.message)
+        console.log(results)
       }
     }
     

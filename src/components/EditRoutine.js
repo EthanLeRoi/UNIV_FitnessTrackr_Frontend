@@ -4,16 +4,15 @@ import { useParams } from 'react-router-dom';
 import { updateRoutines} from '../api';
 
 
-const EditRoutine = ({ routines, token }) => {
+const EditRoutine = ({ routines, token, fetchRoutine, navigate }) => {
   const { routineID } = useParams();
-  
   const [currentRoutine] = routines.filter(routine => routine._id === routineID);
-  
   const {title, name, goal, isPublic} = currentRoutine;
   
   const [newTitle, setNewTitle] = useState(title);
-  const [newGoal, setNewGoal] = useState(goal);
   const [newName, setNewName] = useState(name);
+
+  const [newGoal, setNewGoal] = useState(goal);
   const [newIsPublic, setNewIsPublic] = useState(isPublic);
   
   async function editRoutine() {
@@ -21,11 +20,13 @@ const EditRoutine = ({ routines, token }) => {
       token: token,
       title: newTitle,
       name: newName,
+  
     goal: newGoal,
     isPublic: newIsPublic,
     _id: routineID
     }
-    await updateRoutines(updatedRoutines)
+    await updateRoutines(updatedRoutines);
+    fetchRoutine();
   }
   
 //   async function handleDelete() {
@@ -39,15 +40,15 @@ const EditRoutine = ({ routines, token }) => {
     <form className='editForm' onSubmit={ (ev) => {
       ev.preventDefault();
       editRoutine();
-      
+      navigate('/routines')
     }}>
+
       <input className='editTitle'
         type='text'
         placeholder={title}
         onChange={(ev) => setNewTitle(ev.target.value)}
       />
     
-     
 
       <input className='editName'
         type='text'
@@ -55,13 +56,12 @@ const EditRoutine = ({ routines, token }) => {
         onChange={(ev) => setNewName(ev.target.value)}
       />
 
-  
-
-      <input className='editGoal'
+<input className='editGoal'
         type='text'
         placeholder={goal}
         onChange={(ev) => setNewGoal(ev.target.value)}
       />
+
 
       <input className='newisPublic'
         type='text'

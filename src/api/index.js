@@ -8,16 +8,18 @@ export const registerUser = async (username, password) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                user: {
-                    username: username,
-                    password: password
-                }
+                // user: {
+                //     username: username,
+                //     password: password
+                // }
+                username, password
             })
         })
         const result = await response.json();
         return result;
     } catch (error) {
         console.log('error registering user')
+        
     }
 }
 
@@ -29,10 +31,11 @@ export const loginUser = async (username, password) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                user: {
-                    username,
-                    password
-                }
+                // user: {
+                //     username,
+                //     password
+                // }
+                username, password
             })
         })
 
@@ -42,6 +45,7 @@ export const loginUser = async (username, password) => {
 
     } catch (ex) {
         console.log('error logging in user')
+        
     }
 }
 
@@ -171,12 +175,14 @@ export const getRoutines = async () => {
 export const createRoutines = async (name, goal, isPublic) => {
    try { const response = await fetch(`${baseURL}/routines`, {
         method: "POST",
-        body: JSON.stringify({
+        body: JSON.stringify(
+            {
             name: name,
             goal: goal,
             isPublic: isPublic
             //true
-        })
+        }
+        )
     })
         const result = await response.json();
     return result;

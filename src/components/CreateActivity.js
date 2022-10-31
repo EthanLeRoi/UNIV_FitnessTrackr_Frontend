@@ -1,41 +1,40 @@
 import React, { useState } from "react";
-import { createRoutines } from "../api";
+import { createActivities } from "../api";
 
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 
-const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
+const CreateActivity = ({ token, fetchActivities, navigate }) => {
   const [title, setTitle] = useState("");
-  const [name, setName] = useState("");
-
-  const [goal, setGoal] = useState("");
+  const [description, setDescription] = useState("");
+  const [duration, setDuration] = useState("");
   const [isPublic, setIsPublic] = useState(false);
 
 
   const newRoutine = {
    title,
-   name, 
-   goal,
+   description,
+   duration,
    isPublic,
   };
 
-  async function addRoutine() {
-    const results = await createRoutines(token, newRoutine);
-    fetchRoutines();
-    navigate(`/routines`);
+  async function addActivity() {
+    const results = await createActivities(token, newRoutine);
+    fetchActivities();
+    navigate(`/activities`);
   }
   return (
     
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          addRoutine();
+          addActivity();
         }}
       >
         <div>
           
-          <h1>Create A New Routine</h1>
+          <h1>Create A New Activity</h1>
           <input
             type="text"
             placeholder="Title*"
@@ -45,21 +44,18 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
         
           <input
             type="text"
-            placeholder="Name*"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
+            placeholder="Description*"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
           />
          
-
-    
-
-
          <input
             type="text"
-            placeholder="Goal*"
-            value={goal}
-            onChange={(event) => setGoal(event.target.value)}
+            placeholder="Duration*"
+            value={duration}
+            onChange={(event) => setDuration(event.target.value)}
           />
+    
 
         <FormControlLabel control={<Checkbox type='checkbox'
             color='success'
@@ -67,7 +63,7 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
             onChange={(event)=> setIsPublic(event.target.checked)}
         />}  label="isPublic?"/>
 
-         <button variant="contained" type="submit">Create Routine</button>
+         <button variant="contained" type="submit">Create Activity</button>
 
         </div>
 
@@ -75,4 +71,4 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
     
   );
 };
-export default CreateRoutine;
+export default CreateActivity;
