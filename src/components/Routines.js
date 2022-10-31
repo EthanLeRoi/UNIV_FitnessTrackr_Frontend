@@ -1,63 +1,75 @@
 
-import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { deleteRoutine } from '../api';
+import { createRoutineActivity } from './AttachActivitiesToRoutines';
+import { Button, TextField, Typography } from '@mui/material';
+import ButtonGroup from '@mui/material/ButtonGroup';
+
+//most likely need attachActivityToRoutine here
 
 
-const Routines = ({ routines }) => {
-  const [searchTerm, setSearchTerm] = useState('');
- 
-  function routineMatches(routine, string) {
-      const{ title, goal} = routine;
+const Routines = ({ routines, token, activity}) => {
+  // const [searchTerm, setSearchTerm] = useState('');
   
-      if (title.toLowerCase().includes(string.toLowerCase()) || goal.toLowerCase().includes(string.toLowerCase())) {
-          return routine;
-      }
-    // return true if any of the fields you want to check against include the text
-    // strings have an .includes() method 
-  }
+  // function routineMatches(routine) {
+  //   console.log(routine)
+  //     const { name, goal} = routines;
+     
   
-  const filteredRoutines = routines.filter(routine => routineMatches(routine, searchTerm));
-  const routinesToDisplay = searchTerm.length ? filteredRoutines : routines;
+  //     if ((name.toLowerCase().includes(''.toLowerCase())) || goal.toLowerCase().includes(''.toLowerCase())) {
+  //         return routine;
+  //     }
+  // }
+
+     
+
+  
+  
+  // const filteredRoutines = routines.filter(routine => routineMatches(routine, searchTerm));
+  // const routinesToDisplay = searchTerm.length ? filteredRoutines : routines;
 
   return (
+    
     <div className='outerDiv' id='outer div element'>
        <div className='searchedRoutine'>
           <form onSubmit={(event) => {
               event.preventDefault();
+
           }}> 
-            <TextField
-             type = 'text'
-             placeholder = 'Search'
-             onChange = {(event) => setSearchTerm(event.target.value)}
-            ></TextField>
-            <Button type='Search'>Search</Button>
-            
+          
+
+          <button>
+            <Link to='/routines/create-routine'>Add a Routine</Link>
+          </button>
+           
            </form>  
           </div>
     {
-      routinesToDisplay.map((routine) => {
-        const {name, goal, title, _id, isAuthor } = routine;
+    
+      routines.map((routine) => {
+        const { name, goal, _id, isAuthor } = routine;
         return (
           <div className='postHolder' key={_id}>
-            <h3 className='postTitle'>{title}</h3>
             <p className='postName'>Name: {name}</p>
             <p className='postGoal'>Goal: {goal}</p>
+            <p attachActivityToRoutine
+            className='postRoutineActivity'>Activities: {activity}</p>
             {
               isAuthor ? (
-            
-                <button>
-                  <p className='isAuthor'>Is Author </p>
-
-                  <Link to={`/routines/edit-routine/${_id}`}>Edit</Link>
-                  
-                </button>
+                <>
+                <Typography align = 'left'>
+                    <ButtonGroup variant="contained">
+                        <Button className="routine-buttons"><Link to={`/routines/edit-post/${_id}`}>Edit</Link></Button>
+                        <Button className="routine-buttons" onClick={()=> deleteRoutine(token, _id)}>Delete</Button>
+                    </ButtonGroup>
+                </Typography>    
+                </>
               ) : (
                 
-                <button>
-                  <Link class="ViewButton" to={`/routines/${_id}` }>View</Link>
-                
-                </button>
+                <Typography align= 'left'>    
+                                    <Button className="routine-buttons" variant="contained"><Link to={`/routines/${_id}`}>View</Link></Button>
+                </Typography>
               
               )
               
@@ -72,4 +84,7 @@ const Routines = ({ routines }) => {
 }
 
 
+
 export default Routines;
+
+

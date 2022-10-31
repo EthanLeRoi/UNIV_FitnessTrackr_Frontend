@@ -1,51 +1,42 @@
 import React, { useState } from "react";
-import { createRoutines } from "../api";
-import { Link } from 'react-router-dom';
+import { attachActivityToRoutine } from "../api";
 
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 
-const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
-  const [title, setTitle] = useState("");
+const CreateRoutineActivity = ({ token, fetchRoutines, navigate }) => {
+ 
   const [name, setName] = useState("");
 
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
 
 
-  const newRoutine = {
-   title,
+  const newRoutineActivity = {
+  
    name, 
    goal,
    isPublic,
   };
 
-  async function addRoutine() {
-    const results = await createRoutines(token, newRoutine);
+  async function addRoutineActivity() {
+    const results = await attachActivityToRoutine(token, newRoutineActivity);
     fetchRoutines();
     navigate(`/routines`);
-  //   <button>
-  //   <Link to='/routines/create-routine'>Add a Routine</Link>
-  //  </button>
   }
   return (
     
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          addRoutine();
+          addRoutineActivity();
         }}
       >
         <div>
           
-          <h1>Create A New Routine</h1>
-          <input
-            type="text"
-            placeholder="Title*"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          />
+          <h1>Create A New Routine Activity</h1>
+        
         
           <input
             type="text"
@@ -71,7 +62,7 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
             onChange={(event)=> setIsPublic(event.target.checked)}
         />}  label="isPublic?"/>
 
-         <button variant="contained" type="submit">Create Routine</button>
+         <button variant="contained" type="submit">Create Activity Routine</button>
 
         </div>
 
@@ -79,4 +70,4 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
     
   );
 };
-export default CreateRoutine;
+export default CreateRoutineActivity;

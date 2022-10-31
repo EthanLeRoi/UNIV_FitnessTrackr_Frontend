@@ -9,13 +9,14 @@ const Register = ({ setToken, navigate }) => {
     
     const handleSubmit = async () => {
       const results = await registerUser(username, password);
-      if (results.success) {
-        setToken(results.data.token);
-        window.localStorage.setItem('token', results.data.token);
+      if (results.token) {
+        setToken(results.token);
+        window.localStorage.setItem('token', results.token);
         navigate('/profile');
       } else {
-        console.log(results.error.message)
+        console.log(results)
       }
+     
     }
     
     return (
