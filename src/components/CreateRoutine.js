@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createRoutines } from "../api";
-import { Link } from 'react-router-dom';
 
+import { Link } from 'react-router-dom';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
@@ -25,9 +25,9 @@ const CreateRoutine = ({ token, fetchRoutines, navigate }) => {
     const results = await createRoutines(token, newRoutine);
     fetchRoutines();
     navigate(`/routines`);
-  //   <button>
-  //   <Link to='/routines/create-routine'>Add a Routine</Link>
-  //  </button>
+    <button>
+    <Link to='/routines/create-routine'>Add a Routine</Link>
+   </button>
   }
   return (
     

@@ -47,12 +47,20 @@
     margin-bottom: 2%; 
   }
 
+<<<<<<< HEAD
   #routines {
+=======
+  #posts {
+>>>>>>> c0592815a87516406e937d91564e4b3756a2b9e1
   
  
       flex-direction:column;
   
+<<<<<<< HEAD
   background-color: darkslategray;
+=======
+  background-color: #15AAD7;
+>>>>>>> c0592815a87516406e937d91564e4b3756a2b9e1
   color: white;
   padding: 10px;
   border:  #0F7391;
