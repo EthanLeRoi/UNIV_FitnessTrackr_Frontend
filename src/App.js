@@ -62,7 +62,8 @@ const App = () => {
     }
     
     const results = await getUserDetails(token)
-    if (results) {
+    if (results
+) {
       setUser(results);
     } else {
       console.log(results);
