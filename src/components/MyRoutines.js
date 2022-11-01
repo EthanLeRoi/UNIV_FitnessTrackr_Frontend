@@ -3,7 +3,7 @@ import React from 'react';
 // import {Link} from 'react-router-dom';
 
 const MyRoutines = ({ user }) => {
-  const messages = user.messages;
+  const routines = user.routines;
   const userID = user._id;
   
   console.log(user)
@@ -12,38 +12,22 @@ const MyRoutines = ({ user }) => {
     <div>
       <div>
         <h1>List of my routines!</h1>
+
+      </div>
+      <div>
+
         {
-          messages && messages.map(message => {
-            const fromUserID = message.fromUser._id;
-            const {username} = message.fromUser;
-            const {title} = message.routine;
+          routines && routines.map(routine => {
+            const fromUserID = routine.fromUser._id;
             
-            if (userID !== fromUserID) {
+            if (userID === fromUserID) {
               return (
-                <div key={message._id}>
-                  <p>From User: {username} </p>
-                  <p>Message: {message.content}</p>
-                  <p>Routine Reference: {title}</p>
-                </div>
+                <div key={routine._id}>{routine.content}</div>
               )
             }
           })    
         }
       </div>
-      {/* <div>
-        <h1>Messages from You!</h1>
-        {
-          messages && messages.map(message => {
-            const fromUserID = message.fromUser._id;
-            
-            if (userID === fromUserID) {
-              return (
-                <div key={message._id}>{message.content}</div>
-              )
-            }
-          })    
-        }
-      </div> */}
     </div>
   )
 }

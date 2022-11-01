@@ -2,71 +2,74 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { deleteRoutine } from '../api';
+import { createRoutineActivity } from './AttachActivitiesToRoutines';
 import { Button, TextField, Typography } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
 //most likely need attachActivityToRoutine here
-//update routine activity
 
 
-const Routines = ({ routines, token }) => {
-  const [searchTerm, setSearchTerm] = useState('');
- 
-  function routineMatches(routine, string) {
-      const{ title, goal} = routine;
+const Routines = ({ routines, token, activities }) => {
+  // const [searchTerm, setSearchTerm] = useState('');
   
-      if (title.toLowerCase().includes(string.toLowerCase()) || goal.toLowerCase().includes(string.toLowerCase())) {
-          return routine;
-      }
-    // return true if any of the fields you want to check against include the text
-    // strings have an .includes() method 
-  }
+  // function routineMatches(routine) {
+    console.log(routines)
+  //     const { name, goal} = routines;
+     
   
-  const filteredRoutines = routines.filter(routine => routineMatches(routine, searchTerm));
-  const routinesToDisplay = searchTerm.length ? filteredRoutines : routines;
+  //     if ((name.toLowerCase().includes(''.toLowerCase())) || goal.toLowerCase().includes(''.toLowerCase())) {
+  //         return routine;
+  //     }
+  // }
+
+     
+
+  
+  
+  // const filteredRoutines = routines.filter(routine => routineMatches(routine, searchTerm));
+  // const routinesToDisplay = searchTerm.length ? filteredRoutines : routines;
 
   return (
+    
     <div className='outerDiv' id='outer div element'>
        <div className='searchedRoutine'>
           <form onSubmit={(event) => {
               event.preventDefault();
-              <button>
-              <Link to='/routines/create-routine'>Add a Routine</Link>
-             </button>
+
           }}> 
-            <TextField
-             type = 'text'
-             placeholder = 'Search'
-             onChange = {(event) => setSearchTerm(event.target.value)}
-            ></TextField>
-            <Button type='Search'>Search</Button>
-            
+          
+        
+          <button>
+            <Link to='/routines/create-routine'>Add a Routine</Link>
+          </button>
+          
            </form>  
           </div>
     {
-      routinesToDisplay.map((routine) => {
-        const {name, goal, description, duration, title, _id, isAuthor } = routine;
+    
+      routines.map((routine) => {
+        const { name, goal, creatorName, _id, isAuthor, activity} = routine;
         return (
           <div className='postHolder' key={_id}>
-            <h3 className='postTitle'>{title}</h3>
             <p className='postName'>Name: {name}</p>
             <p className='postGoal'>Goal: {goal}</p>
-            <p className='postDescription'>Description: {description}</p>
-            <p className='postDuration'>Duration: {duration}</p>
+            <p className='postCreatorName'>Routine By: {creatorName}</p>
+            <p attachActivityToRoutine
+            className='postRoutineActivity'>Activities: {activity}</p>
             {
               isAuthor ? (
                 <>
                 <Typography align = 'left'>
                     <ButtonGroup variant="contained">
-                        <Button className="post-buttons"><Link to={`/posts/edit-post/${_id}`}>Edit</Link></Button>
-                        <Button className="post-buttons" onClick={()=> deleteRoutine(token, _id)}>Delete</Button>
+                        <Button className="routine-buttons"><Link to={`/routines/edit-post/${_id}`}>Edit</Link></Button>
+                        <Button className="routine-buttons" onClick={()=> deleteRoutine(token, _id)}>Delete</Button>
                     </ButtonGroup>
                 </Typography>    
                 </>
               ) : (
                 
                 <Typography align= 'left'>    
-                                    <Button className="post-buttons" variant="contained"><Link to={`/posts/${_id}`}>View</Link></Button>
+                                    <Button className="routine-buttons" variant="contained"><Link to={`/routines/${_id}`}>View</Link></Button>
                 </Typography>
               
               )
@@ -77,9 +80,17 @@ const Routines = ({ routines, token }) => {
         )
       })
     }
+
+
+
+
+
   </div>
   )
 }
 
 
+
 export default Routines;
+
+

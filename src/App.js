@@ -14,18 +14,22 @@ import {
  MyRoutines,
   Navbar,
   CreateRoutine,
-  EditRoutine
+  EditRoutine,
+  CreateActivity,
+  AttachActivitiesToRoutines
 } from './components'; 
 
 import {
   getRoutines,
-  getUserDetails
+  getUserDetails,
+  getActivities
 } from './api';
 
 
 const App = () => {
   
  const [routines, setRoutines] = useState([]);
+ const [activities, setActivities] = useState([]);
   const [token, setToken] = useState('');
   const [user, setUser] = useState({});
   
@@ -40,7 +44,11 @@ const App = () => {
   
   async function fetchRoutines() {
     const results = await getRoutines(token)
-    setRoutines(results.routines);
+    setRoutines(results);
+  }
+  async function fetchActivities() {
+    const results = await getActivities(token)
+    setActivities(results);
   }
   
   async function getMe() {
@@ -54,16 +62,19 @@ const App = () => {
     }
     
     const results = await getUserDetails(token)
-    if (results.success) {
+    if (results
+) {
       setUser(results);
     } else {
-      console.log(results.message);
+      console.log(results);
+        //.message );
     }
   }
   
   useEffect(() => {
     fetchRoutines();
     getMe();
+    fetchActivities();
   }, [token])
   
   // useEffect(() => {
@@ -86,9 +97,30 @@ const App = () => {
       <Route 
         path='/Activities' 
         element={<Activities 
-        //activities={activities} 
+        activities={activities} 
     />} 
     />
+
+<Route
+          exact path='/activities/create-activity'
+          element={<CreateActivity 
+            token={ token } 
+            fetchActivities={ fetchActivities } 
+            navigate={ navigate }
+          /> }
+        />
+
+
+<Route 
+      exact path='/activities/attach-activities-to-routines'
+      element={<AttachActivitiesToRoutines
+        token={ token } 
+        fetchActivities={ fetchActivities } 
+        navigate={ navigate }
+      // attachactivitiestoroutines={AttachActivitiesToRoutines}
+    />}
+    />
+
 
 <Route 
       path='/routines'

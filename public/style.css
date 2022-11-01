@@ -46,3 +46,15 @@
     height: 100px;
     margin-bottom: 2%; 
   }
+
+  #routines {
+  
+ 
+      flex-direction:column;
+  
+  background-color: darkslategray;
+  color: white;
+  padding: 10px;
+  border:  #0F7391;
+  }
+  

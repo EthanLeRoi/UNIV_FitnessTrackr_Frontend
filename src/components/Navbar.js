@@ -12,6 +12,7 @@ const Navbar = ({ logout, token }) => {
                 {
                     token ? (
                         <Link to='/' onClick={() => logout()}>Logout</Link>
+                        
                     ) : (
                 <>
                     <Link to='/register'>Register</Link>
